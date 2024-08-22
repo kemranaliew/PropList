@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146996647303",
+    "project_id": "proplist-2c132",
+    "storage_bucket": "proplist-2c132.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146996647303:android:440c5a0ed57d801462ef22",
+        "android_client_info": {
+          "package_name": "com.proplist.proplist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg1NdADGZcDK0L2DYr4-L14_soXdmTrcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
