@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proplist/constants/constants.dart';
 import 'package:proplist/data/data.dart';
 import 'package:proplist/model/house.dart';
+import 'package:proplist/screen/details/details_screen.dart';
 
 class Houses extends StatefulWidget {
   const Houses({super.key});
@@ -15,100 +16,111 @@ class _HousesState extends State<Houses> {
     Size size = MediaQuery.of(context).size;
     House house = houseList[index];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: appPadding, vertical: appPadding / 2),
-      child: SizedBox(
-        height: 250,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image(
-                    height: 180,
-                    width: size.width,
-                    fit: BoxFit.cover,
-                    image: AssetImage(house.imageUrl),
-                  ),
-                ),
-                Positioned(
-                  right: appPadding / 2,
-                  top: appPadding / 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: IconButton(
-                      icon: house.isFav
-                          ? const Icon(
-                              Icons.favorite_rounded,
-                              color: red,
-                            )
-                          : const Icon(
-                              Icons.favorite_border_rounded,
-                              color: black,
-                            ),
-                      onPressed: () {
-                        setState(() {
-                          house.isFav = !house.isFav;
-                        });
-                      },
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DetailsScreen(house: house),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: appPadding, vertical: appPadding / 2),
+        child: SizedBox(
+          height: 250,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      height: 180,
+                      width: size.width,
+                      fit: BoxFit.cover,
+                      image: AssetImage(house.imageUrl),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  "\€${house.price.toStringAsFixed(3)}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  Positioned(
+                    right: appPadding / 2,
+                    top: appPadding / 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: IconButton(
+                        icon: house.isFav
+                            ? const Icon(
+                                Icons.favorite_rounded,
+                                color: red,
+                              )
+                            : const Icon(
+                                Icons.favorite_border_rounded,
+                                color: black,
+                              ),
+                        onPressed: () {
+                          setState(() {
+                            house.isFav = !house.isFav;
+                          });
+                        },
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10,),
-                Expanded(
-                  child: Text(
-                    house.address,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "\€${house.price.toStringAsFixed(3)}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Text(
+                      house.address,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 15, color: black.withOpacity(0.4)),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "${house.bedRooms} bedrooms / ",
+                    style: const TextStyle(
                       fontSize: 15,
-                      color: black.withOpacity(0.4)
-                      
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(children: [
-              Text(
-                  "${house.bedRooms} bedrooms / ",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    "${house.bathRooms} bathrooms / ",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Text(
-                  "${house.bathRooms} bathrooms / ",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    "${house.sqFeet} sqft / ",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Text(
-                  "${house.sqFeet} sqft / ",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-            ],)
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
