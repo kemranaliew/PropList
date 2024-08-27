@@ -13,7 +13,6 @@ class HouseDetails extends StatefulWidget {
 class _HouseDetailsState extends State<HouseDetails> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
